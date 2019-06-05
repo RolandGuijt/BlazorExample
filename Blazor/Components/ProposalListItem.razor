@@ -1,0 +1,24 @@
+@using Globomantics.Shared.Models
+
+<tr>
+    <td>@Proposal.Title</td>
+    <td>@Proposal.Speaker</td>
+    <td>
+        @if (Proposal.Approved)
+        {
+            <div class="glyphicon glyphicon-check"></div>
+        }
+    </td>
+    <td>
+        @if (!Proposal.Approved)
+        {
+            <a asp-action="Approve" asp-route-proposalId="@Proposal.Id">Approve</a>
+        }
+    </td>
+</tr>
+
+
+@functions {
+    [Parameter]
+    private ProposalModel Proposal { get; set; }
+}

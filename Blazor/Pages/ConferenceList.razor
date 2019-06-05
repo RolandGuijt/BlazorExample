@@ -1,0 +1,38 @@
+@page "/conferences"
+@using Blazor.Services
+@using Globomantics.Shared.Models
+@inject IConferenceService conferenceService
+
+@if (conferences == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Start of event</th>
+                <th>Attendees</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var conference in conferences)
+            {
+                <ConferenceListItem conference="@conference"></ConferenceListItem>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+    IEnumerable<ConferenceModel> conferences;
+
+    protected override async Task OnInitAsync()
+    {
+        conferences = await conferenceService.GetAll();
+    }
+}

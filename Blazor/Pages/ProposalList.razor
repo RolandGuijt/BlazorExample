@@ -1,0 +1,40 @@
+@page "/proposals/{ConferenceId}"
+@using Blazor.Services
+@using Globomantics.Shared.Models
+@inject IProposalService proposalService
+
+@if (proposals == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Speaker</th>
+                <th>Approved</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var proposal in proposals)
+            {
+                <ProposalListItem proposal="@proposal"></ProposalListItem>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+    [Parameter]
+    public string ConferenceId { get; set; }
+
+    IEnumerable<ProposalModel> proposals;
+
+    protected override async Task OnInitAsync()
+    {
+        proposals = await proposalService.GetAll(int.Parse(ConferenceId));
+    }
+}
