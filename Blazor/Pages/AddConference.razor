@@ -1,0 +1,58 @@
+@page "/addconference"
+@using Blazor.Services
+@using Globomantics.Shared.Models
+@inject IConferenceService conferenceService
+@inject IUriHelper uriHelper
+
+<EditForm Model="@conference" OnValidSubmit="@HandleValidSubmit">
+<DataAnnotationsValidator />
+<ValidationSummary />
+<div class="row form-group">
+    <div class="col-md-2 col-md-offset-2">
+        <label for="name">Name</label>
+    </div>
+    <div class="col-md-2">
+        <InputText id="name" class="form-control" bind-Value="@conference.Name" />
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col-md-2 col-md-offset-2">
+        <label for="location">Location</label>
+    </div>
+    <div class="col-md-2">
+        <InputText id="location" class="form-control" bind-Value="@conference.Location" />
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col-md-2 col-md-offset-2">
+        <label for="start">Start</label>
+    </div>
+    <div class="col-md-2">
+        <InputDate id="start" class="form-control" bind-Value="@conference.Start" />
+    </div>
+</div>
+<div class="row form-group">
+    <div class="col-md-2 col-md-offset-2">
+        <label for="attendeeTotal">Attendee total</label>
+    </div>
+    <div class="col-md-2">
+        <InputNumber id="attendeeTotal" class="form-control" bind-Value="@conference.AttendeeTotal" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2 col-md-offset-4">
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</div>
+</EditForm>
+
+@functions {
+
+    private ConferenceModel conference = new ConferenceModel { Start = DateTime.Now };
+
+    private async Task HandleValidSubmit()
+    {
+        await conferenceService.Add(conference);
+        uriHelper.NavigateTo("/conferences");
+    }
+}

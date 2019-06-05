@@ -1,0 +1,45 @@
+﻿@page "/addproposal/{ConferenceId}"
+@using Blazor.Services
+@using Globomantics.Shared.Models
+@inject IProposalService proposalService
+@inject IUriHelper uriHelper
+
+<EditForm Model="@proposal" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="row form-group">
+        <div class="col-md-2 col-md-offset-2">
+            <label for="title">Title</label>
+        </div>
+        <div class="col-md-2">
+            <InputText id="title" class="form-control" bind-Value="@proposal.Title" />
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-2 col-md-offset-2">
+            <label for="speaker">Speaker</label>
+        </div>
+        <div class="col-md-2">
+            <InputText id="speaker" class="form-control" bind-Value="@proposal.Speaker" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-4">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+</EditForm>
+
+@functions {
+    [Parameter]
+    public string ConferenceId { get; set; }
+
+    private ProposalModel proposal = new ProposalModel();
+
+    private async Task HandleValidSubmit()
+    {
+        proposal.ConferenceId = int.Parse(ConferenceId);
+        await proposalService.Add(proposal);
+        uriHelper.NavigateTo($"/proposals/{ConferenceId}");
+    }
+}

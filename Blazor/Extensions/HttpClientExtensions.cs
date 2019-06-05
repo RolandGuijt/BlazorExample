@@ -9,9 +9,8 @@ namespace Blazor.Extensions
     {
         public static async Task PostAsJsonAsync<T>(this HttpClient httpClient, string url, T theObject)
         {
-            var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            var json = JsonSerializer.ToString(theObject, options);
-            await httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json"));
+            var json = JsonSerializer.ToString(theObject);
+            var response = await httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json"));
         }
     }
 }
