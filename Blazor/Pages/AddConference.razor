@@ -12,7 +12,7 @@
         <label for="name">Name</label>
     </div>
     <div class="col-md-2">
-        <InputText id="name" class="form-control" bind-Value="@conference.Name" />
+        <InputText id="name" class="form-control" @bind-Value="@conference.Name" />
     </div>
 </div>
 <div class="row form-group">
@@ -20,7 +20,7 @@
         <label for="location">Location</label>
     </div>
     <div class="col-md-2">
-        <InputText id="location" class="form-control" bind-Value="@conference.Location" />
+        <InputText id="location" class="form-control" @bind-Value="@conference.Location" />
     </div>
 </div>
 <div class="row form-group">
@@ -28,7 +28,7 @@
         <label for="start">Start</label>
     </div>
     <div class="col-md-2">
-        <InputDate id="start" class="form-control" bind-Value="@conference.Start" />
+        <InputDate id="start" class="form-control" @bind-Value="@conference.Start" />
     </div>
 </div>
 <div class="row form-group">
@@ -36,7 +36,7 @@
         <label for="attendeeTotal">Attendee total</label>
     </div>
     <div class="col-md-2">
-        <InputNumber id="attendeeTotal" class="form-control" bind-Value="@conference.AttendeeTotal" />
+        <InputNumber id="attendeeTotal" class="form-control" @bind-Value="@conference.AttendeeTotal" />
     </div>
 </div>
 <div class="row">
@@ -46,7 +46,7 @@
 </div>
 </EditForm>
 
-@functions {
+@code {
 
     private ConferenceModel conference = new ConferenceModel { Start = DateTime.Now };
 
