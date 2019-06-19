@@ -10,10 +10,9 @@ namespace Blazor.Services
     {
         private readonly Proposals.ProposalsClient client;
 
-        public ProposalApiService(IHttpClientFactory httpClientFactory)
+        public ProposalApiService(Proposals.ProposalsClient client)
         {
-            var httpClient = httpClientFactory.CreateClient("GlobomanticsGrpc");
-            client = GrpcClient.Create<Proposals.ProposalsClient>(httpClient);
+            this.client = client;
         }
 
         public async Task<IEnumerable<Proposal>> GetAll(int conferenceId)

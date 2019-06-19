@@ -10,10 +10,9 @@ namespace Blazor.Services
     {
         private readonly Conferences.ConferencesClient client;
 
-        public ConferenceApiService(IHttpClientFactory httpClientFactory)
+        public ConferenceApiService(Conferences.ConferencesClient client)
         {
-            var httpClient = httpClientFactory.CreateClient("GlobomanticsGrpc");
-            client = GrpcClient.Create<Conferences.ConferencesClient>(httpClient);
+            this.client = client;
         }
         public async Task<IEnumerable<Conference>> GetAll()
         {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RpcApi;
 
 namespace Blazor
 {
@@ -17,8 +18,9 @@ namespace Blazor
             services.AddServerSideBlazor();
             services.AddSingleton<IConferenceService, ConferenceApiService>();
             services.AddSingleton<IProposalService, ProposalApiService>();
-            services.AddHttpClient("GlobomanticsGrpc", c =>
-                c.BaseAddress = new Uri("http://localhost:50051"));
+
+            services.AddGrpcClient<Conferences.ConferencesClient>(o => o.BaseAddress = new Uri("http://localhost:50051"));
+            services.AddGrpcClient<Proposals.ProposalsClient>(o => o.BaseAddress = new Uri("http://localhost:50051"));
 
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
         }
