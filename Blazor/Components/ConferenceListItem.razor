@@ -1,9 +1,9 @@
-@using Globomantics.Shared.Models
+@using RpcApi
 
 <tr>
     <td>@Conference.Name</td>
     <td>@Conference.Location</td>
-    <td>@Conference.Start.ToString("ddd d MMM")</td>
+    <td>@Conference.Start.ToDateTime().ToString("ddd d MMM")</td>
     @if (Conference.AttendeeTotal > 5)
     {
 
@@ -18,7 +18,7 @@
     </td>
 </tr>
 
-@functions {
+@code {
     [Parameter]
-    private ConferenceModel Conference { get; set; }
+    private Conference Conference { get; set; }
 }

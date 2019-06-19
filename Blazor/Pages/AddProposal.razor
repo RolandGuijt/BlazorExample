@@ -1,6 +1,6 @@
 ﻿@page "/addproposal/{ConferenceId}"
 @using Blazor.Services
-@using Globomantics.Shared.Models
+@using RpcApi
 @inject IProposalService proposalService
 @inject IUriHelper uriHelper
 
@@ -34,7 +34,7 @@
     [Parameter]
     public string ConferenceId { get; set; }
 
-    private ProposalModel proposal = new ProposalModel();
+    private Proposal proposal = new Proposal();
 
     private async Task HandleValidSubmit()
     {

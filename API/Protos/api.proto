@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option csharp_namespace = "API";
+
+package API;
+
+// The greeting service definition.
+service Conferences {
+  // Sends a greeting
+  rpc GetAll () returns (ListOfConferences) {}
+  rpc Add (Conference) returns (Conference) {}
+}
+
+// The request message containing the user's name.
+message ListOfConferences {
+  repeated Conference Conferences;
+}
+
+// The response message containing the greetings.
+message Conference {
+        int Id;
+        string Name;
+        Timestamp Start;
+        string Location;
+        int AttendeeTotal;
+}
+
+service Proposals {
+	rpc GetAll (int) returns (ListOfProposals) {}
+	rpc Add (Proposal) returns (Proposal) {}
+	rpc Approve (int) returns (Proposal) {}
+}
+
+message ListOfProposals {
+	repeated Proposal Proposals
+}
+
+message Proposal {
+        int Id;
+        int ConferenceId;
+        string Speaker;
+        string Title;
+        bool Approved;
+}

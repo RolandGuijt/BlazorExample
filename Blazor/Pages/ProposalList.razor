@@ -1,6 +1,6 @@
 @page "/proposals/{ConferenceId}"
 @using Blazor.Services
-@using Globomantics.Shared.Models
+@using RpcApi
 @inject IProposalService proposalService
 
 @if (proposals == null)
@@ -40,7 +40,7 @@ else
     [Parameter]
     public string ConferenceId { get; set; }
 
-    IEnumerable<ProposalModel> proposals;
+    IEnumerable<Proposal> proposals;
 
     protected override async Task OnInitAsync()
     {

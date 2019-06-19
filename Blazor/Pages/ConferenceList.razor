@@ -1,6 +1,6 @@
 @page "/conferences"
 @using Blazor.Services
-@using Globomantics.Shared.Models
+@using RpcApi
 @inject IConferenceService conferenceService
 
 @if (conferences == null)
@@ -38,7 +38,7 @@ else
 }
 
 @code {
-    IEnumerable<ConferenceModel> conferences;
+    IEnumerable<Conference> conferences;
 
     protected override async Task OnInitAsync()
     {

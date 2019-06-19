@@ -1,5 +1,5 @@
-@using Globomantics.Shared.Models
 @using Blazor.Services
+@using RpcApi
 @inject IProposalService proposalService
 
 <tr>
@@ -20,9 +20,9 @@
 </tr>
 
 
-@functions {
+@code {
     [Parameter]
-    private ProposalModel Proposal { get; set; }
+    private Proposal Proposal { get; set; }
 
     private void HandleApprove()
     {

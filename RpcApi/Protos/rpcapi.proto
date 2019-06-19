@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+option csharp_namespace = "RpcApi";
+import "google/protobuf/timestamp.proto";
+
+package API;
+
+service Conferences {
+  rpc GetAll (GetAllConferencesRequest) returns (GetAllConferencesResponse) {}
+  rpc Add (AddConferenceRequest) returns (AddConferenceResponse) {}
+}
+
+message GetAllConferencesRequest {}
+
+message GetAllConferencesResponse {
+  repeated Conference Conferences = 1;
+}
+
+message AddConferenceRequest {
+	Conference conference = 1;
+}
+
+message AddConferenceResponse {
+	Conference conference = 1;
+}
+
+message Conference {
+        int32 Id = 1;
+        string Name = 2;
+        google.protobuf.Timestamp Start = 3;
+        string Location = 4;
+        int32 AttendeeTotal = 5;
+}
+
+service Proposals {
+	rpc GetAll (GetAllProposalsRequest) returns (GetAllProposalsResponse) {}
+	rpc Add (AddProposalRequest) returns (AddProposalResponse) {}
+	rpc Approve (ApproveRequest) returns (ApproveResponse) {}
+}
+
+message GetAllProposalsRequest {
+    int32 ConferenceId = 1;
+}
+
+message GetAllProposalsResponse {
+	repeated Proposal Proposals = 1;
+}
+
+message AddProposalRequest {
+	Proposal Proposal = 1;
+}
+
+message AddProposalResponse {
+	Proposal Proposal = 1;
+}
+
+message ApproveRequest {
+	int32 Id = 1;
+}
+
+message ApproveResponse {
+    Proposal Proposal = 1;
+}
+message Proposal {
+    int32 Id = 1;
+    int32 ConferenceId = 2;
+    string Speaker = 3;
+    string Title = 4;
+     bool Approved = 5;
+}
+

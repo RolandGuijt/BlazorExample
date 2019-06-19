@@ -1,47 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Globomantics.Shared.Models;
-using System;
-using Blazor.Extensions;
+using RpcApi;
+using Grpc.Net.Client;
 
 namespace Blazor.Services
 {  
     public class ProposalApiService : IProposalService
     {
-        private readonly HttpClient client;
+        private readonly Proposals.ProposalsClient client;
 
         public ProposalApiService(IHttpClientFactory httpClientFactory)
         {
-            client = httpClientFactory.CreateClient("GlobomanticsApi");
+            var httpClient = httpClientFactory.CreateClient("GlobomanticsGrpc");
+            client = GrpcClient.Create<Proposals.ProposalsClient>(httpClient);
         }
 
-        public async Task<IEnumerable<ProposalModel>> GetAll(int conferenceId)
+        public async Task<IEnumerable<Proposal>> GetAll(int conferenceId)
         {
-            var result = new List<ProposalModel>();
-            var response = await client.GetAsync($"/v1/Proposal/{conferenceId}");
-            if (response.IsSuccessStatusCode)
-                result = await response.Content.ReadAsAsync<List<ProposalModel>>();
-            else
-                throw new HttpRequestException(response.ReasonPhrase);
-            return result;
+            var result = await client.GetAllAsync(new GetAllProposalsRequest { ConferenceId = conferenceId });
+            return result.Proposals;
         }
 
-        public async Task Add(ProposalModel model)
+        public async Task Add(Proposal proposal)
         {
-            await client.PostAsJsonAsync("/v1/Proposal", model);
+            await client.AddAsync(new AddProposalRequest { Proposal = proposal });
         }
 
-        public async Task<ProposalModel> Approve(int proposalId)
+        public async Task<Proposal> Approve(int proposalId)
         {
-            var response = await client.PutAsync($"/v1/Proposal/{proposalId}", 
-                null);
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadAsAsync<ProposalModel>();
-            }
-            throw new ArgumentException($"Error retrieving proposal {proposalId}"+
-                $" Response: {response.ReasonPhrase}");
+            var response = await client.ApproveAsync(new ApproveRequest { Id = proposalId });
+            return response.Proposal;
         }
     }
 }
