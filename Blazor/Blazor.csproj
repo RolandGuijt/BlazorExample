@@ -24,5 +24,10 @@
   <ItemGroup>
     <Protobuf Include="..\RpcApi\Protos\rpcapi.proto" GrpcServices="Client" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\css\bootstrap.css">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>
