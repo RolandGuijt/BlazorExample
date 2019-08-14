@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Grpc.Net.Client;
 using RpcApi;
 
 namespace Blazor.Services

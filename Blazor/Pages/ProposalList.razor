@@ -1,7 +1,5 @@
 @page "/proposals/{ConferenceId}"
-@using Blazor.Services
-@using RpcApi
-@inject IProposalService proposalService
+@inherits ProposalListModel
 
 @if (proposals == null)
 {
@@ -34,16 +32,4 @@ else
             <a href="/addproposal/@ConferenceId">Add</a>
         </div>
     </div>
-}
-
-@code {
-    [Parameter]
-    public string ConferenceId { get; set; }
-
-    IEnumerable<Proposal> proposals;
-
-    protected override async Task OnInitAsync()
-    {
-        proposals = await proposalService.GetAll(int.Parse(ConferenceId));
-    }
 }

@@ -40,7 +40,7 @@ else
 @code {
     IEnumerable<Conference> conferences;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         conferences = await conferenceService.GetAll();
     }

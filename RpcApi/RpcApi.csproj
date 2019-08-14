@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\rpcapi.proto" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Protobuf Include="Protos\rpcapi.proto" GrpcServices="Server" />
   </ItemGroup>
 
