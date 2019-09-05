@@ -19,10 +19,14 @@ namespace Blazor
             services.AddSingleton<IConferenceService, ConferenceApiService>();
             services.AddSingleton<IProposalService, ProposalApiService>();
 
-            services.AddGrpcClient<Conferences.ConferencesClient>(o => o.BaseAddress = new Uri("http://localhost:50051"));
-            services.AddGrpcClient<Proposals.ProposalsClient>(o => o.BaseAddress = new Uri("http://localhost:50051"));
+            services.AddGrpcClient<Conferences.ConferencesClient>(
+                o => o.Address = new Uri("http://localhost:50051"));
+            services.AddGrpcClient<Proposals.ProposalsClient>(
+                o => o.Address = new Uri("http://localhost:50051"));
 
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            AppContext.SetSwitch(
+                "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", 
+                true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,9 +1,8 @@
 @page "/addconference"
 @using Blazor.Services
 @using RpcApi
-@using Google.Protobuf.WellKnownTypes
 @inject IConferenceService conferenceService
-@inject IUriHelper uriHelper
+@inject NavigationManager navigationManager
 
 <EditForm Model="@conference" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
@@ -13,7 +12,8 @@
             <label for="name">Name</label>
         </div>
         <div class="col-md-2">
-            <InputText id="name" class="form-control" @bind-Value="conference.Name" />
+            <InputText id="name" class="form-control" 
+                       @bind-Value="conference.Name" />
         </div>
     </div>
     <div class="row form-group">
@@ -21,7 +21,8 @@
             <label for="location">Location</label>
         </div>
         <div class="col-md-2">
-            <InputText id="location" class="form-control" @bind-Value="conference.Location" />
+            <InputText id="location" class="form-control" 
+                       @bind-Value="conference.Location" />
         </div>
     </div>
     <div class="row form-group">
@@ -29,7 +30,8 @@
             <label for="start">Start</label>
         </div>
         <div class="col-md-2">
-            <InputDate id="start" class="form-control" @bind-Value="conference.StartDate" />
+            <InputDate id="start" class="form-control" 
+                       @bind-Value="conference.StartDate" />
         </div>
     </div>
     <div class="row form-group">
@@ -37,7 +39,8 @@
             <label for="attendeeTotal">Attendee total</label>
         </div>
         <div class="col-md-2">
-            <InputNumber id="attendeeTotal" class="form-control" @bind-Value="conference.AttendeeTotal" />
+            <InputNumber id="attendeeTotal" class="form-control" 
+                         @bind-Value="conference.AttendeeTotal" />
         </div>
     </div>
     <div class="row">
@@ -54,6 +57,6 @@
     private async Task HandleValidSubmit()
     {
         await conferenceService.Add(conference);
-        uriHelper.NavigateTo("/");
+        navigationManager.NavigateTo("/");
     }
 }

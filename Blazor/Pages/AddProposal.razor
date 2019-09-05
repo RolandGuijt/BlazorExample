@@ -2,7 +2,7 @@
 @using Blazor.Services
 @using RpcApi
 @inject IProposalService proposalService
-@inject IUriHelper uriHelper
+@inject NavigationManager navigationManager
 
 <EditForm Model="@proposal" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
@@ -40,6 +40,6 @@
     {
         proposal.ConferenceId = int.Parse(ConferenceId);
         await proposalService.Add(proposal);
-        uriHelper.NavigateTo($"/proposals/{ConferenceId}");
+        navigationManager.NavigateTo($"/proposals/{ConferenceId}");
     }
 }

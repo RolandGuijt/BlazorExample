@@ -13,14 +13,16 @@ namespace RpcApi.Services
             this.repo = repo;
         }
 
-        public override Task<GetAllProposalsResponse> GetAll(GetAllProposalsRequest request, ServerCallContext context)
+        public override Task<GetAllProposalsResponse> GetAll(
+            GetAllProposalsRequest request, ServerCallContext context)
         {
             var result = new GetAllProposalsResponse();
             result.Proposals.Add(repo.GetAllForConference(request.ConferenceId));
             return Task.FromResult(result);
         }
 
-        public override Task<AddProposalResponse> Add(AddProposalRequest request, ServerCallContext context)
+        public override Task<AddProposalResponse> Add(
+            AddProposalRequest request, ServerCallContext context)
         {
             return Task.FromResult(new AddProposalResponse
             {

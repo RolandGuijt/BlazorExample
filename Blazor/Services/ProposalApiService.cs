@@ -15,13 +15,15 @@ namespace Blazor.Services
 
         public async Task<IEnumerable<Proposal>> GetAll(int conferenceId)
         {
-            var result = await client.GetAllAsync(new GetAllProposalsRequest { ConferenceId = conferenceId });
+            var result = await client.GetAllAsync(
+                new GetAllProposalsRequest { ConferenceId = conferenceId });
             return result.Proposals;
         }
 
         public async Task Add(Proposal proposal)
         {
-            await client.AddAsync(new AddProposalRequest { Proposal = proposal });
+            await client.AddAsync(
+                new AddProposalRequest { Proposal = proposal });
         }
 
         public async Task<Proposal> Approve(int proposalId)
