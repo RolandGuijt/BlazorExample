@@ -11,8 +11,8 @@ namespace RpcApi.Repositories
 
         public ConferenceMemoryRepo()
         {
-            conferences.Add(new Conference { Id = 1, Name = "NDC", Location = "Oslo", Start = Timestamp.FromDateTime(new DateTime(2019, 6, 12).ToUniversalTime()), AttendeeTotal = 2132});
-            conferences.Add(new Conference { Id = 2, Name = "Pluralsight Live!", Location = "Salt Lake City", Start = Timestamp.FromDateTime(new DateTime(2019, 8, 22).ToUniversalTime()), AttendeeTotal = 3210});
+            conferences.Add(new Conference { Id = 1, Name = "Centric Tech Event", Location = "Bussum", Start = Timestamp.FromDateTime(new DateTime(2019, 9, 20).ToUniversalTime()), AttendeeTotal = 511});
+            conferences.Add(new Conference { Id = 2, Name = "Pluralsight Live!", Location = "Salt Lake City", Start = Timestamp.FromDateTime(new DateTime(2019, 11, 22).ToUniversalTime()), AttendeeTotal = 3210});
         }
         public IEnumerable<Conference> GetAll()
         {
