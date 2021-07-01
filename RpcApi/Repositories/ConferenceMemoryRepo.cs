@@ -1,7 +1,7 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Google.Protobuf.WellKnownTypes;
 
 namespace RpcApi.Repositories
 {
@@ -11,8 +11,8 @@ namespace RpcApi.Repositories
 
         public ConferenceMemoryRepo()
         {
-            conferences.Add(new Conference { Id = 1, Name = "Centric Tech Event", Location = "Bussum", Start = Timestamp.FromDateTime(new DateTime(2019, 9, 20).ToUniversalTime()), AttendeeTotal = 511});
-            conferences.Add(new Conference { Id = 2, Name = "Pluralsight Live!", Location = "Salt Lake City", Start = Timestamp.FromDateTime(new DateTime(2019, 11, 22).ToUniversalTime()), AttendeeTotal = 3210});
+            conferences.Add(new Conference { Id = 1, Name = "DWX", Location = "Nuremberg", Start = Timestamp.FromDateTime(new DateTime(2020, 2, 26).ToUniversalTime()), AttendeeTotal = 900 });
+            conferences.Add(new Conference { Id = 2, Name = "DevFest", Location = "Orlando", Start = Timestamp.FromDateTime(new DateTime(2020, 11, 22).ToUniversalTime()), AttendeeTotal = 3210 });
         }
         public IEnumerable<Conference> GetAll()
         {
