@@ -20,14 +20,5 @@ namespace RpcApi.Services
             result.Conferences.Add(repo.GetAll());
             return Task.FromResult(result);
         }
-
-        public override Task<AddConferenceResponse> Add(
-            AddConferenceRequest request, ServerCallContext context)
-        {
-            return Task.FromResult(new AddConferenceResponse
-            {
-                Conference = repo.Add(request.Conference)
-            });
-        }
     }
 }
