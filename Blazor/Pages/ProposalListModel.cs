@@ -13,6 +13,8 @@ namespace Blazor.Pages
 
         public IEnumerable<Proposal> proposals;
 
+        protected string AddProposalLink => $"/addproposal/{ConferenceId}";
+
         [Inject]
         protected IProposalService ProposalService { get; set; }
 

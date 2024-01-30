@@ -13,12 +13,14 @@
     {
         <td>@Conference.AttendeeTotal</td>
     }
-    <td>
-        <a href="/proposals/@Conference.Id">Proposals</a>
+    <td> 
+        <NavLink href="@ProposalsLink">Proposals</NavLink>
     </td>
 </tr>
 
 @code {
     [Parameter]
     public Conference Conference { get; set; }
+
+    string ProposalsLink => $"/proposals/{Conference.Id}";
 }
